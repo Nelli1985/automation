@@ -1,3 +1,5 @@
+package API;
+
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import org.junit.runner.RunWith;
@@ -6,10 +8,9 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         strict = true,
         plugin = {"pretty","html:reports/test-report"},
-        tags= "@selenium",
+        tags= "@api",
         features = "src/test/resources/features",
         junit = {"--step-notifications"})
 
-public class CucumberRunnerTest {
-
+public class CucumberRunnerTestAPI {
 }
