@@ -1,5 +1,6 @@
 package API;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import cucumber.api.java.en.And;
@@ -159,5 +160,121 @@ public class MyAPIStepdefs {
         assertEquals("Error: Cart Total Price doesn't match!","1 item(s) - $176.62", cartTotalPrice);
     }
 
+    @And("I set shipping address")
+    public void i_set_shipping_address() {
+        String requestURL = baseURI + "guestshipping"; // building the API endpoint
+
+        RequestSpecification httpRequest = RestAssured.given();
+
+        httpRequest.header("Accept", "application/json"); // adding header to the request
+        httpRequest.header("X-Oc-Session", sessionId); // adding header to the request
+        httpRequest.header("X-Oc-Merchant-Id", merchantId); // adding header to the request
+
+        //Adding json body to the request:
+        JsonObject requestParams = new JsonObject();
+        requestParams.addProperty("firstname", "Demo");
+        requestParams.addProperty("lastname", "User");
+        requestParams.addProperty("city", "Berlin");
+        requestParams.addProperty("address_1", "Demo");
+        requestParams.addProperty("address_2", "Demo");
+        requestParams.addProperty("country_id", "81");
+        requestParams.addProperty("postcode", "3333");
+        requestParams.addProperty("zone_id", "1256");
+
+        httpRequest.body(requestParams.toString());
+
+        response = httpRequest.post(requestURL);
+        response.getBody().prettyPrint();
+
+        // asserting the response is correct
+        assertEquals("Error: Status code doesn't match", 200, response.getStatusCode());
+        assertEquals("Error: Content type doesn't match", "application/json; charset=utf-8", response.getContentType());
+
+        // another assertion to make sure the request was actually successful
+        Integer success = JsonPath.from(response.getBody().asString()).get("success");
+        assertEquals("Error: Success code doesn't match", "1", success.toString());
+    }
+
+    @And("I get and set shipping method")
+    public void i_get_and_set_shipping_method() {
+        // Get shipping method
+        String requestURL = baseURI + "shippingmethods"; // building the API endpoint
+
+        RequestSpecification httpRequest = RestAssured.given();
+
+        httpRequest.header("Accept", "application/json"); // adding header to the request
+        httpRequest.header("X-Oc-Session", sessionId); // adding header to the request
+        httpRequest.header("X-Oc-Merchant-Id", merchantId); // adding header to the request
+
+        response = httpRequest.get(requestURL);
+        response.getBody().prettyPrint();
+
+        // asserting the response is correct
+        assertEquals("Error: Status code doesn't match", 200, response.getStatusCode());
+        assertEquals("Error: Content type doesn't match", "application/json; charset=utf-8", response.getContentType());
+
+        //Set shipping method
+        //Adding json body to the request:
+        JsonObject requestParams = new JsonObject();
+        requestParams.addProperty("shipping_method", "flat.flat");
+        requestParams.addProperty("comment", "string");
+
+        httpRequest.body(requestParams.toString());
+
+        response = httpRequest.post(requestURL);
+        response.getBody().prettyPrint();
+
+        // another assertion to make sure the request was actually successful
+        Integer success = JsonPath.from(response.getBody().asString()).get("success");
+        assertEquals("Error: Success code doesn't match", "1", success.toString());
+
+        /*// Assert shipping title
+        String shippingTitle = JsonPath.from(response.getBody().asString()).get("data.shipping_methods.flat.title");
+        assertEquals("Error: Shipping title doesn't match!","Flat Rate", shippingTitle);*/
+    }
+
+    @And("I get and set payment method")
+    public void i_get_and_set_payment_method() {/*
+        // Get payment method
+        String requestURL = baseURI + "paymentmethods"; // building the API endpoint
+
+        RequestSpecification httpRequest = RestAssured.given();
+
+        httpRequest.header("Accept", "application/json"); // adding header to the request
+        httpRequest.header("X-Oc-Session", sessionId); // adding header to the request
+        httpRequest.header("X-Oc-Merchant-Id", merchantId); // adding header to the request
+
+        response = httpRequest.get(requestURL);
+        response.getBody().prettyPrint();
+
+        // asserting the response is correct
+        assertEquals("Error: Status code doesn't match", 200, response.getStatusCode());
+        assertEquals("Error: Content type doesn't match", "application/json; charset=utf-8", response.getContentType());
+
+        // Set payment method
+        // Adding json body to the request:
+        JsonObject requestParams = new JsonObject();
+        requestParams.addProperty("payment_method", "cod");
+        requestParams.addProperty("agree", "1");
+        requestParams.addProperty("comment", "string");
+
+        httpRequest.body(requestParams.toString());
+
+        response = httpRequest.post(requestURL);
+        response.getBody().prettyPrint();
+
+        // another assertion to make sure the request was actually successful
+        Integer success = JsonPath.from(response.getBody().asString()).get("success");
+        assertEquals("Error: Success code doesn't match", "1", success.toString());
+
+        // Assert payment title
+        String paymentTitle = JsonPath.from(response.getBody().asString()).get("data.payment_methods.bank_transfer.title");
+        assertEquals("Error: Shipping title doesn't match!","Bank Transfer", paymentTitle);*/
+    }
+
+    @And("I confirm my order and clear the cart")
+    public void i_confirm_my_order_and_clear_the_cart() {
+
+    }
 }
 

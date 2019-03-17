@@ -54,4 +54,44 @@ formatter.match({
 formatter.result({
   "status": "passed"
 });
+formatter.step({
+  "name": "I set shipping address",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "MyAPIStepdefs.i_set_shipping_address()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "I get and set shipping method",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "MyAPIStepdefs.i_get_and_set_shipping_method()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "I get and set payment method",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "MyAPIStepdefs.i_get_and_set_payment_method()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "I confirm my order and clear the cart",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "MyAPIStepdefs.i_confirm_my_order_and_clear_the_cart()"
+});
+formatter.result({
+  "status": "passed"
+});
 });
