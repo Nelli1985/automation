@@ -70,8 +70,8 @@
       <file leaf-file-name="MyAPIStepdefs.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/API/MyAPIStepdefs.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="232" column="90" selection-start-line="232" selection-start-column="90" selection-end-line="232" selection-end-column="90" />
+            <state relative-caret-position="168">
+              <caret line="373" column="8" lean-forward="true" selection-start-line="373" selection-start-column="8" selection-end-line="373" selection-end-column="8" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -82,8 +82,8 @@
       <file leaf-file-name="shoppingCart.feature" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/resources/features/API/shoppingCart.feature">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
-              <caret line="10" column="34" lean-forward="true" selection-start-line="10" selection-start-column="2" selection-end-line="10" selection-end-column="34" />
+            <state relative-caret-position="170">
+              <caret line="10" column="22" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -100,6 +100,8 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>\&quot;([^\&quot;]*)\&quot;</find>
+      <find>Verify childSoc is</find>
+      <find>pretty</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -176,8 +178,8 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="width" value="1946" />
-    <option name="height" value="1106" />
+    <option name="width" value="1920" />
+    <option name="height" value="1020" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -381,66 +383,67 @@
       <workItem from="1552745885486" duration="2492000" />
       <workItem from="1552748589958" duration="7096000" />
       <workItem from="1552808238517" duration="34182000" />
-      <workItem from="1552849008612" duration="9201000" />
+      <workItem from="1552849008612" duration="24301000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="CucumberRunner_C__Users_nelli_Documents_Cucumber - 2019.03.17 at 23h 18m 14s.xml">
+    <history-entry file="CucumberRunner_C__Users_nelli_Documents_Cucumber - 2019.03.27 at 12h 27m 16s.xml">
       <configuration name="CucumberRunner C:\Users\nelli\Documents\Cucumber" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CucumberRunner_C__Users_nelli_Documents_Cucumber - 2019.03.17 at 23h 18m 39s.xml">
+    <history-entry file="CucumberRunner_C__Users_nelli_Documents_Cucumber - 2019.03.27 at 12h 27m 31s.xml">
       <configuration name="CucumberRunner C:\Users\nelli\Documents\Cucumber" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CucumberRunner_C__Users_nelli_Documents_Cucumber - 2019.03.17 at 23h 19m 05s.xml">
+    <history-entry file="CucumberRunner_C__Users_nelli_Documents_Cucumber - 2019.03.27 at 12h 27m 42s.xml">
       <configuration name="CucumberRunner C:\Users\nelli\Documents\Cucumber" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CucumberRunner_C__Users_nelli_Documents_Cucumber - 2019.03.17 at 23h 23m 27s.xml">
+    <history-entry file="CucumberRunner_C__Users_nelli_Documents_Cucumber - 2019.03.27 at 12h 29m 59s.xml">
       <configuration name="CucumberRunner C:\Users\nelli\Documents\Cucumber" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CucumberRunner_C__Users_nelli_Documents_Cucumber - 2019.03.17 at 23h 24m 38s.xml">
+    <history-entry file="CucumberRunner_C__Users_nelli_Documents_Cucumber - 2019.03.27 at 12h 31m 32s.xml">
       <configuration name="CucumberRunner C:\Users\nelli\Documents\Cucumber" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CucumberRunner_C__Users_nelli_Documents_Cucumber - 2019.03.17 at 23h 26m 55s.xml">
+    <history-entry file="CucumberRunner_C__Users_nelli_Documents_Cucumber - 2019.03.27 at 12h 32m 39s.xml">
       <configuration name="CucumberRunner C:\Users\nelli\Documents\Cucumber" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CucumberRunner_C__Users_nelli_Documents_Cucumber - 2019.03.17 at 23h 28m 41s.xml">
+    <history-entry file="CucumberRunner_C__Users_nelli_Documents_Cucumber - 2019.03.27 at 12h 33m 10s.xml">
       <configuration name="CucumberRunner C:\Users\nelli\Documents\Cucumber" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CucumberRunner_C__Users_nelli_Documents_Cucumber - 2019.03.17 at 23h 30m 39s.xml">
+    <history-entry file="CucumberRunner_C__Users_nelli_Documents_Cucumber - 2019.03.27 at 12h 35m 08s.xml">
       <configuration name="CucumberRunner C:\Users\nelli\Documents\Cucumber" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CucumberRunner_C__Users_nelli_Documents_Cucumber - 2019.03.17 at 23h 31m 27s.xml">
+    <history-entry file="CucumberRunner_C__Users_nelli_Documents_Cucumber - 2019.03.27 at 12h 37m 01s.xml">
       <configuration name="CucumberRunner C:\Users\nelli\Documents\Cucumber" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CucumberRunner_C__Users_nelli_Documents_Cucumber - 2019.03.17 at 23h 33m 35s.xml">
+    <history-entry file="CucumberRunner_C__Users_nelli_Documents_Cucumber - 2019.03.27 at 12h 39m 04s.xml">
       <configuration name="CucumberRunner C:\Users\nelli\Documents\Cucumber" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="59412000" />
+    <option name="totallyTimeSpent" value="74512000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1297" height="737" extended-state="0" />
+    <frame x="0" y="0" width="1280" height="680" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" order="7" weight="0.52579033" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.5257353" />
       <window_info anchor="right" id="Palette&#9;" order="4" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="5" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="right" id="Maven Projects" order="8" weight="0.33755276" />
+      <window_info anchor="right" id="Maven Projects" order="8" weight="0.33688524" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.640599" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3492647" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.5362563" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2271625" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23032787" />
       <window_info anchor="bottom" id="Tail" order="7" />
       <window_info anchor="right" id="Database" order="7" weight="0.32983023" />
+      <window_info anchor="bottom" id="Find" order="1" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
@@ -452,7 +455,6 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" />
     </layout>
     <layout-to-restore>
       <window_info anchor="right" id="Palette" order="3" />
@@ -698,15 +700,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/resources/features/API/shoppingCart.feature">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="10" column="34" lean-forward="true" selection-start-line="10" selection-start-column="2" selection-end-line="10" selection-end-column="34" />
+        <state relative-caret-position="170">
+          <caret line="10" column="22" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/API/MyAPIStepdefs.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="232" column="90" selection-start-line="232" selection-start-column="90" selection-end-line="232" selection-end-column="90" />
+        <state relative-caret-position="168">
+          <caret line="373" column="8" lean-forward="true" selection-start-line="373" selection-start-column="8" selection-end-line="373" selection-end-column="8" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

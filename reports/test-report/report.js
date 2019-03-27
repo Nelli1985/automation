@@ -25,7 +25,7 @@ formatter.result({
   "status": "passed"
 });
 formatter.step({
-  "name": "I add product \"31\" to the cart",
+  "name": "I add product \"41\" to the cart",
   "keyword": "When "
 });
 formatter.match({
@@ -45,7 +45,7 @@ formatter.result({
   "status": "passed"
 });
 formatter.step({
-  "name": "I see the product \"31\" in cart",
+  "name": "I see the product \"41\" in cart",
   "keyword": "Then "
 });
 formatter.match({
@@ -65,21 +65,41 @@ formatter.result({
   "status": "passed"
 });
 formatter.step({
-  "name": "I get and set shipping method",
+  "name": "I get shipping method",
   "keyword": "And "
 });
 formatter.match({
-  "location": "MyAPIStepdefs.i_get_and_set_shipping_method()"
+  "location": "MyAPIStepdefs.i_get_shipping_method()"
 });
 formatter.result({
   "status": "passed"
 });
 formatter.step({
-  "name": "I get and set payment method",
+  "name": "I set shipping method",
   "keyword": "And "
 });
 formatter.match({
-  "location": "MyAPIStepdefs.i_get_and_set_payment_method()"
+  "location": "MyAPIStepdefs.i_set_shipping_method()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "I get payment method",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "MyAPIStepdefs.i_get_payment_method()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "I set payment method",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "MyAPIStepdefs.i_set_payment_method()"
 });
 formatter.result({
   "status": "passed"
