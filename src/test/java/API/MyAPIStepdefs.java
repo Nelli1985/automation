@@ -27,13 +27,24 @@ public class MyAPIStepdefs {
         return response;
     }
 
+    private Response getRequest(final String uri) {
+        RequestSpecification httpRequest = RestAssured.given();
+
+        httpRequest.header("Accept", "application/json");
+        httpRequest.header("X-Oc-Session", sessionId);
+        httpRequest.header("X-Oc-Merchant-Id", merchantId);
+
+        return httpRequest.get(uri);
+    }
+
     @Given("^I have created a session$")
     public void sessionCreation() {
-        String requestURL = baseURI + "session";
+        String requestURL = baseURI + "session"; // building the API endpoint
 
         RequestSpecification httpRequest = RestAssured.given();
-        httpRequest.header("Accept", "application/json");
-        httpRequest.header("X-Oc-Merchant-Id", merchantId);
+
+        httpRequest.header("Accept", "application/json"); // adding header to the request
+        httpRequest.header("X-Oc-Merchant-Id", merchantId); // adding header to the request
 
         Response response = httpRequest.get(requestURL);
 
@@ -77,8 +88,7 @@ public class MyAPIStepdefs {
         assertEquals("Error: Cart Total Price doesn't match!","$122.00", cartTotalPrice);
     }
 
-
-    @And("I create a guest customer")
+    @And("I create a guest customer")@When("")
     public void creatingGuestCustomer() {
         String requestURL = baseURI + "guest";
 
@@ -112,13 +122,7 @@ public class MyAPIStepdefs {
     public void confirmingProductInTheCart(String cartProductId) {
         String requestURL = baseURI + "cart";
 
-        RequestSpecification httpRequest = RestAssured.given();
-
-        httpRequest.header("Accept", "application/json");
-        httpRequest.header("X-Oc-Session", sessionId);
-        httpRequest.header("X-Oc-Merchant-Id", merchantId);
-
-        Response response = httpRequest.get(requestURL);
+        Response response = getRequest(requestURL);
 
         basicAssertion(response);
 
@@ -169,13 +173,8 @@ public class MyAPIStepdefs {
     public void gettingShippingMethod() {
         String requestURL = baseURI + "shippingmethods";
 
-        RequestSpecification httpRequest = RestAssured.given();
+        Response response = getRequest(requestURL);
 
-        httpRequest.header("Accept", "application/json");
-        httpRequest.header("X-Oc-Session", sessionId);
-        httpRequest.header("X-Oc-Merchant-Id", merchantId);
-
-        Response response = httpRequest.get(requestURL);
         basicAssertion(response);
 
         String shippingTitle = JsonPath.from(response.getBody().asString()).get("data.shipping_methods.flat.title");
@@ -183,7 +182,6 @@ public class MyAPIStepdefs {
 
         String shippingCost = JsonPath.from(response.getBody().asString()).get("data.shipping_methods.flat.quote.flat.cost");
         assertEquals("Error: Shipping cost doesn't match!","5.00", shippingCost);
-
     }
 
     @And("I set shipping method")
@@ -209,13 +207,7 @@ public class MyAPIStepdefs {
     public void gettingPaymentMethod() {
         String requestURL = baseURI + "paymentmethods";
 
-        RequestSpecification httpRequest = RestAssured.given();
-
-        httpRequest.header("Accept", "application/json");
-        httpRequest.header("X-Oc-Session", sessionId);
-        httpRequest.header("X-Oc-Merchant-Id", merchantId);
-
-        Response response = httpRequest.get(requestURL);
+        Response response = getRequest(requestURL);
         basicAssertion(response);
 
         String paymentTitle = JsonPath.from(response.getBody().asString()).get("data.payment_methods.pp_express.title");

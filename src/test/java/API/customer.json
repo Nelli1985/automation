@@ -1,0 +1,25 @@
+{
+  "firstname": "Demo",
+  "lastname": "User",
+  "email": "nash1@vipmail.hu",
+  "telephone": "nash1@vipmail.hu",
+  "company": "string",
+  "city": "Berlin",
+  "address_1": "Demo",
+  "address_2": "Demo",
+  "country_id": "81",
+  "postcode": "3333",
+  "zone_id": "1256"
+}
+
+requestParams.addProperty("firstname", "Demo");
+requestParams.addProperty("lastname", "User");
+requestParams.addProperty("email", "nash1@vipmail.hu");
+requestParams.addProperty("telephone", "1-541-754-3010");
+requestParams.addProperty("company", "string");
+requestParams.addProperty("city", "Berlin");
+requestParams.addProperty("address_1", "Demo");
+requestParams.addProperty("address_2", "Demo");
+requestParams.addProperty("country_id", "81");
+requestParams.addProperty("postcode", "3333");
+requestParams.addProperty("zone_id", "1256");
