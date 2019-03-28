@@ -3,11 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b93d632c-54b8-4d63-bc86-cf50439cd2da" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/test-report/report.js" beforeDir="false" afterPath="$PROJECT_DIR$/reports/test-report/report.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/API/MyAPIStepdefs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/API/MyAPIStepdefs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/features/API/shoppingCart.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/features/API/shoppingCart.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/API/MyAPIStepdefs.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/API/MyAPIStepdefs.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/features/API/shoppingCart.feature" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/features/API/shoppingCart.feature" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -73,8 +69,8 @@
       <file leaf-file-name="MyAPIStepdefs.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/API/MyAPIStepdefs.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="46" column="8" selection-start-line="46" selection-start-column="8" selection-end-line="46" selection-end-column="8" />
+            <state relative-caret-position="175">
+              <caret line="281" column="8" lean-forward="true" selection-start-line="281" selection-start-column="8" selection-end-line="281" selection-end-column="8" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -391,17 +387,11 @@
       <workItem from="1552745885486" duration="2492000" />
       <workItem from="1552748589958" duration="7096000" />
       <workItem from="1552808238517" duration="34182000" />
-      <workItem from="1552849008612" duration="40941000" />
+      <workItem from="1552849008612" duration="43880000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="CucumberRunner_C__Users_nelli_Documents_Cucumber - 2019.03.28 at 06h 21m 31s.xml">
-      <configuration name="CucumberRunner C:\Users\nelli\Documents\Cucumber" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="CucumberRunner_C__Users_nelli_Documents_Cucumber - 2019.03.28 at 06h 24m 43s.xml">
-      <configuration name="CucumberRunner C:\Users\nelli\Documents\Cucumber" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="CucumberRunner_C__Users_nelli_Documents_Cucumber - 2019.03.28 at 06h 26m 51s.xml">
       <configuration name="CucumberRunner C:\Users\nelli\Documents\Cucumber" configurationId="JUnit" />
     </history-entry>
@@ -426,9 +416,15 @@
     <history-entry file="CucumberRunner_C__Users_nelli_Documents_Cucumber - 2019.03.28 at 06h 55m 58s.xml">
       <configuration name="CucumberRunner C:\Users\nelli\Documents\Cucumber" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="CucumberRunner_C__Users_nelli_Documents_Cucumber - 2019.03.28 at 07h 02m 33s.xml">
+      <configuration name="CucumberRunner C:\Users\nelli\Documents\Cucumber" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="CucumberRunner_C__Users_nelli_Documents_Cucumber - 2019.03.28 at 07h 12m 38s.xml">
+      <configuration name="CucumberRunner C:\Users\nelli\Documents\Cucumber" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="91152000" />
+    <option name="totallyTimeSpent" value="94091000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
@@ -452,7 +448,7 @@
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.17173524" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.19141324" />
       <window_info anchor="right" id="Coverage" order="0" side_tool="true" weight="0.32955465" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.5362563" />
       <window_info content_ui="combo" id="Project" order="0" weight="0.22834007" />
@@ -506,14 +502,6 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/API/MyAPIStepdefs.java</url>
-          <line>75</line>
-          <properties />
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-      </breakpoints>
       <option name="time" value="13" />
     </breakpoint-manager>
   </component>
@@ -789,8 +777,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/API/MyAPIStepdefs.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="46" column="8" selection-start-line="46" selection-start-column="8" selection-end-line="46" selection-end-column="8" />
+        <state relative-caret-position="175">
+          <caret line="281" column="8" lean-forward="true" selection-start-line="281" selection-start-column="8" selection-end-line="281" selection-end-column="8" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

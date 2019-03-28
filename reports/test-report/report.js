@@ -19,7 +19,7 @@ formatter.step({
   "keyword": "Given "
 });
 formatter.match({
-  "location": "MyAPIStepdefs.iHaveCreatedASession()"
+  "location": "MyAPIStepdefs.sessionCreation()"
 });
 formatter.result({
   "status": "passed"
@@ -29,7 +29,7 @@ formatter.step({
   "keyword": "When "
 });
 formatter.match({
-  "location": "MyAPIStepdefs.iAddAProductToTheCart(String)"
+  "location": "MyAPIStepdefs.addingProduct(String)"
 });
 formatter.result({
   "status": "passed"
@@ -39,7 +39,7 @@ formatter.step({
   "keyword": "And "
 });
 formatter.match({
-  "location": "MyAPIStepdefs.i_create_a_guest_customer()"
+  "location": "MyAPIStepdefs.creatingGuestCustomer()"
 });
 formatter.result({
   "status": "passed"
@@ -49,7 +49,7 @@ formatter.step({
   "keyword": "Then "
 });
 formatter.match({
-  "location": "MyAPIStepdefs.i_see_the_product_in_cart(String)"
+  "location": "MyAPIStepdefs.confirmingProductInTheCart(String)"
 });
 formatter.result({
   "status": "passed"
@@ -59,7 +59,7 @@ formatter.step({
   "keyword": "And "
 });
 formatter.match({
-  "location": "MyAPIStepdefs.i_set_shipping_address()"
+  "location": "MyAPIStepdefs.settingShippingAddress()"
 });
 formatter.result({
   "status": "passed"
@@ -69,7 +69,7 @@ formatter.step({
   "keyword": "And "
 });
 formatter.match({
-  "location": "MyAPIStepdefs.i_get_shipping_method()"
+  "location": "MyAPIStepdefs.gettingShippingMethod()"
 });
 formatter.result({
   "status": "passed"
@@ -79,7 +79,7 @@ formatter.step({
   "keyword": "And "
 });
 formatter.match({
-  "location": "MyAPIStepdefs.i_set_shipping_method()"
+  "location": "MyAPIStepdefs.settingShippingMethod()"
 });
 formatter.result({
   "status": "passed"
@@ -89,7 +89,7 @@ formatter.step({
   "keyword": "And "
 });
 formatter.match({
-  "location": "MyAPIStepdefs.i_get_payment_method()"
+  "location": "MyAPIStepdefs.gettingPaymentMethod()"
 });
 formatter.result({
   "status": "passed"
@@ -99,7 +99,7 @@ formatter.step({
   "keyword": "And "
 });
 formatter.match({
-  "location": "MyAPIStepdefs.i_set_payment_method()"
+  "location": "MyAPIStepdefs.settingPaymentMethod()"
 });
 formatter.result({
   "status": "passed"
@@ -109,7 +109,7 @@ formatter.step({
   "keyword": "And "
 });
 formatter.match({
-  "location": "MyAPIStepdefs.i_confirm_my_order_and_clear_the_cart()"
+  "location": "MyAPIStepdefs.confirmingOrder()"
 });
 formatter.result({
   "status": "passed"
@@ -119,7 +119,7 @@ formatter.step({
   "keyword": "And "
 });
 formatter.match({
-  "location": "MyAPIStepdefs.i_clear_the_cart()"
+  "location": "MyAPIStepdefs.clearingCart()"
 });
 formatter.result({
   "status": "passed"

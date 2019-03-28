@@ -14,97 +14,80 @@ import io.restassured.specification.RequestSpecification;
 import static org.junit.Assert.assertEquals;
 
 public class MyAPIStepdefs {
-    private String baseURI = "http://opencart3-simple.api.opencart-api.com/api/rest/";  // defined class level parameter so it would be usable by other methods as well
-    private String sessionId;  // this parameter will be used by most of the following requests, so this too is a class level variable
-    private final String merchantId = "123"; // this parameter will be used by most of the following requests, so this too is a class level variable with defined value
-
+    private String baseURI = "http://opencart3-simple.api.opencart-api.com/api/rest/";
+    private String sessionId;
+    private final String merchantId = "123";
 
     private Response basicAssertion(final Response response){
-        // asserting the response is correct
         assertEquals("Error: Status code doesn't match", 200, response.getStatusCode());
         assertEquals("Error: Content type doesn't match", "application/json; charset=utf-8", response.getContentType());
 
-        // another assertion to make sure the request was actually successful
         Integer success = JsonPath.from(response.getBody().asString()).get("success");
         assertEquals("Error: Success code doesn't match", "1", success.toString());
         return response;
     }
 
     @Given("^I have created a session$")
-    public void iHaveCreatedASession() {
-
-        String requestURL = baseURI + "session"; // building the API endpoint
+    public void sessionCreation() {
+        String requestURL = baseURI + "session";
 
         RequestSpecification httpRequest = RestAssured.given();
-
-        httpRequest.header("Accept", "application/json"); // adding header to the request
-        httpRequest.header("X-Oc-Merchant-Id", merchantId); // adding header to the request
+        httpRequest.header("Accept", "application/json");
+        httpRequest.header("X-Oc-Merchant-Id", merchantId);
 
         Response response = httpRequest.get(requestURL);
 
         basicAssertion(response);
-        //response.getBody().prettyPrint();
-        
-        sessionId = JsonPath.from(response.getBody().asString()).get("data.session"); // getting the sessionId value from the response body and saving it
+
+        sessionId = JsonPath.from(response.getBody().asString()).get("data.session");
     }
 
     @When("I add product \"([^\"]*)\" to the cart")
-    public void iAddAProductToTheCart(String cartProductId) {
-        String requestURL = baseURI + "cart"; // building the API endpoint
+    public void addingProduct(String cartProductId) {
+        String requestURL = baseURI + "cart";
 
         RequestSpecification httpRequest = RestAssured.given();
 
-        httpRequest.header("Accept", "application/json"); // adding header to the request
-        httpRequest.header("X-Oc-Session", sessionId); // adding header to the request
-        httpRequest.header("X-Oc-Merchant-Id", merchantId); // adding header to the request
+        httpRequest.header("Accept", "application/json");
+        httpRequest.header("X-Oc-Session", sessionId);
+        httpRequest.header("X-Oc-Merchant-Id", merchantId);
 
-        //Adding json body to the request:
         JsonObject requestParams = new JsonObject();
         requestParams.addProperty("product_id", cartProductId);
         requestParams.addProperty("quantity", "1");
 
         httpRequest.body(requestParams.toString());
-
         Response response = httpRequest.post(requestURL);
-
-        //prints out the result
-        //response.getBody().prettyPrint();
 
         basicAssertion(response);
 
-        // Assert productId
         String productId = JsonPath.from(response.getBody().asString()).get("data.product.product_id");
         assertEquals("Error: Product id doesn't match!","41", productId);
 
-        // Assert productName
         String productName = JsonPath.from(response.getBody().asString()).get("data.product.name");
         assertEquals("Error: Product name doesn't match!","iMac", productName);
 
-        // Assert productQuantity
         String productQuantity = JsonPath.from(response.getBody().asString()).get("data.product.quantity");
         assertEquals("Error: Product quantity doesn't match!","1", productQuantity);
 
-        // Assert cartTotalProductQuantity
         int cartTotalProductQuantity = JsonPath.from(response.getBody().asString()).get("data.total_product_count");
         assertEquals("Error: Cart Total Product Quantity doesn't match!",1, cartTotalProductQuantity);
 
-        // Assert cartTotalPrice
         String cartTotalPrice = JsonPath.from(response.getBody().asString()).get("data.total_price");
         assertEquals("Error: Cart Total Price doesn't match!","$122.00", cartTotalPrice);
     }
 
 
     @And("I create a guest customer")
-    public void i_create_a_guest_customer() {
-        String requestURL = baseURI + "guest"; // building the API endpoint
+    public void creatingGuestCustomer() {
+        String requestURL = baseURI + "guest";
 
         RequestSpecification httpRequest = RestAssured.given();
 
-        httpRequest.header("Accept", "application/json"); // adding header to the request
-        httpRequest.header("X-Oc-Session", sessionId); // adding header to the request
-        httpRequest.header("X-Oc-Merchant-Id", merchantId); // adding header to the request
+        httpRequest.header("Accept", "application/json");
+        httpRequest.header("X-Oc-Session", sessionId);
+        httpRequest.header("X-Oc-Merchant-Id", merchantId);
 
-        //Adding json body to the request:
         JsonObject requestParams = new JsonObject();
         requestParams.addProperty("firstname", "Demo");
         requestParams.addProperty("lastname", "User");
@@ -122,61 +105,49 @@ public class MyAPIStepdefs {
 
         Response response = httpRequest.post(requestURL);
 
-        //prints out the result
-        //response.getBody().prettyPrint();
-
         basicAssertion(response);
     }
 
     @Then("I see the product \"([^\"]*)\" in cart")
-    public void i_see_the_product_in_cart(String cartProductId) {
-        String requestURL = baseURI + "cart"; // building the API endpoint
+    public void confirmingProductInTheCart(String cartProductId) {
+        String requestURL = baseURI + "cart";
 
         RequestSpecification httpRequest = RestAssured.given();
 
-        httpRequest.header("Accept", "application/json"); // adding header to the request
-        httpRequest.header("X-Oc-Session", sessionId); // adding header to the request
-        httpRequest.header("X-Oc-Merchant-Id", merchantId); // adding header to the request
+        httpRequest.header("Accept", "application/json");
+        httpRequest.header("X-Oc-Session", sessionId);
+        httpRequest.header("X-Oc-Merchant-Id", merchantId);
 
         Response response = httpRequest.get(requestURL);
 
-        //prints out the result
-        //response.getBody().prettyPrint();
-
         basicAssertion(response);
 
-        // Assert productId jsonData.id_tokens[0]["id_token.basic"];
         String productId = JsonPath.from(response.getBody().asString()).get("data.products[0].product_id");
         assertEquals("Error: Product id doesn't match!",cartProductId, productId);
 
-        // Assert productName
         String productName = JsonPath.from(response.getBody().asString()).get("data.products[0].name");
         assertEquals("Error: Product name doesn't match!","iMac", productName);
 
-        // Assert productQuantity
         String productQuantity = JsonPath.from(response.getBody().asString()).get("data.products[0].quantity");
         assertEquals("Error: Product quantity doesn't match!","1", productQuantity);
 
-        // Assert cartTotalProductQuantity
         int cartTotalProductQuantity = JsonPath.from(response.getBody().asString()).get("data.total_product_count");
         assertEquals("Error: Cart Total Product Quantity doesn't match!",1, cartTotalProductQuantity);
 
-        // Assert cartTotalPrice
         String cartTotalPrice = JsonPath.from(response.getBody().asString()).get("data.total");
         assertEquals("Error: Cart Total Price doesn't match!","1 item(s) - $122.00", cartTotalPrice);
     }
 
     @And("I set shipping address")
-    public void i_set_shipping_address() {
-        String requestURL = baseURI + "guestshipping"; // building the API endpoint
+    public void settingShippingAddress() {
+        String requestURL = baseURI + "guestshipping";
 
         RequestSpecification httpRequest = RestAssured.given();
 
-        httpRequest.header("Accept", "application/json"); // adding header to the request
-        httpRequest.header("X-Oc-Session", sessionId); // adding header to the request
-        httpRequest.header("X-Oc-Merchant-Id", merchantId); // adding header to the request
+        httpRequest.header("Accept", "application/json");
+        httpRequest.header("X-Oc-Session", sessionId);
+        httpRequest.header("X-Oc-Merchant-Id", merchantId);
 
-        //Adding json body to the request:
         JsonObject requestParams = new JsonObject();
         requestParams.addProperty("firstname", "Demo");
         requestParams.addProperty("lastname", "User");
@@ -191,162 +162,124 @@ public class MyAPIStepdefs {
 
         Response response = httpRequest.post(requestURL);
 
-        //prints out the result
-        //response.getBody().prettyPrint();
-
         basicAssertion(response);
     }
 
     @And("I get shipping method")
-    public void i_get_shipping_method() {
-        // Get shipping method
-        String requestURL = baseURI + "shippingmethods"; // building the API endpoint
+    public void gettingShippingMethod() {
+        String requestURL = baseURI + "shippingmethods";
 
         RequestSpecification httpRequest = RestAssured.given();
 
-        httpRequest.header("Accept", "application/json"); // adding header to the request
-        httpRequest.header("X-Oc-Session", sessionId); // adding header to the request
-        httpRequest.header("X-Oc-Merchant-Id", merchantId); // adding header to the request
+        httpRequest.header("Accept", "application/json");
+        httpRequest.header("X-Oc-Session", sessionId);
+        httpRequest.header("X-Oc-Merchant-Id", merchantId);
 
         Response response = httpRequest.get(requestURL);
-
-        //response.getBody().prettyPrint();
-
         basicAssertion(response);
 
-        // Assert shipping title
         String shippingTitle = JsonPath.from(response.getBody().asString()).get("data.shipping_methods.flat.title");
         assertEquals("Error: Shipping title doesn't match!","Flat Rate", shippingTitle);
 
-        // Assert shipping cost
         String shippingCost = JsonPath.from(response.getBody().asString()).get("data.shipping_methods.flat.quote.flat.cost");
         assertEquals("Error: Shipping cost doesn't match!","5.00", shippingCost);
 
     }
 
     @And("I set shipping method")
-    public void i_set_shipping_method() {
-        // Get shipping method
-        String requestURL = baseURI + "shippingmethods"; // building the API endpoint
+    public void settingShippingMethod() {
+        String requestURL = baseURI + "shippingmethods";
 
         RequestSpecification httpRequest = RestAssured.given();
 
-        httpRequest.header("Accept", "application/json"); // adding header to the request
-        httpRequest.header("X-Oc-Session", sessionId); // adding header to the request
-        httpRequest.header("X-Oc-Merchant-Id", merchantId); // adding header to the request
+        httpRequest.header("Accept", "application/json");
+        httpRequest.header("X-Oc-Session", sessionId);
+        httpRequest.header("X-Oc-Merchant-Id", merchantId);
 
-        //Set shipping method
-        //Adding json body to the request:
         JsonObject requestParams = new JsonObject();
         requestParams.addProperty("shipping_method", "flat.flat");
         requestParams.addProperty("comment", "string");
 
-        // POST shipping options request and asserting it
         httpRequest.body(requestParams.toString());
         Response response = httpRequest.post(requestURL);
-        //response.getBody().prettyPrint();
-
         basicAssertion(response);
     }
 
     @And("I get payment method")
-    public void i_get_payment_method() {
-        // Get payment method
-        String requestURL = baseURI + "paymentmethods"; // building the API endpoint
+    public void gettingPaymentMethod() {
+        String requestURL = baseURI + "paymentmethods";
 
         RequestSpecification httpRequest = RestAssured.given();
 
-        httpRequest.header("Accept", "application/json"); // adding header to the request
-        httpRequest.header("X-Oc-Session", sessionId); // adding header to the request
-        httpRequest.header("X-Oc-Merchant-Id", merchantId); // adding header to the request
+        httpRequest.header("Accept", "application/json");
+        httpRequest.header("X-Oc-Session", sessionId);
+        httpRequest.header("X-Oc-Merchant-Id", merchantId);
 
-        // GET paymentmethod and asserting it
         Response response = httpRequest.get(requestURL);
-        //response.getBody().prettyPrint();
-
         basicAssertion(response);
 
-        // Assert payment title
         String paymentTitle = JsonPath.from(response.getBody().asString()).get("data.payment_methods.pp_express.title");
         assertEquals("Error: Payment title doesn't match!","PayPal Express Checkout", paymentTitle);
 
-        // Assert cod title
         String codTitle = JsonPath.from(response.getBody().asString()).get("data.payment_methods.cod.title");
         assertEquals("Error: Code cod title doesn't match!","Cash On Delivery", codTitle);
     }
 
     @And("I set payment method")
-    public void i_set_payment_method() {
-        // Get payment method
-        String requestURL = baseURI + "paymentmethods"; // building the API endpoint
+    public void settingPaymentMethod() {
+        String requestURL = baseURI + "paymentmethods";
 
         RequestSpecification httpRequest = RestAssured.given();
 
-        httpRequest.header("Accept", "application/json"); // adding header to the request
-        httpRequest.header("X-Oc-Session", sessionId); // adding header to the request
-        httpRequest.header("X-Oc-Merchant-Id", merchantId); // adding header to the request
+        httpRequest.header("Accept", "application/json");
+        httpRequest.header("X-Oc-Session", sessionId);
+        httpRequest.header("X-Oc-Merchant-Id", merchantId);
 
-        // POST paymentmethod
-        // Adding json body to the request:
         JsonObject requestParams = new JsonObject();
         requestParams.addProperty("payment_method", "cod");
         requestParams.addProperty("agree", "1");
         requestParams.addProperty("comment", "string");
 
         httpRequest.body(requestParams.toString());
-
         Response response = httpRequest.post(requestURL);
 
         basicAssertion(response);
-
     }
 
     @And("I confirm my order")
-    public void i_confirm_my_order_and_clear_the_cart() {
-
-        String requestURL = baseURI + "confirm"; // building the API endpoint
+    public void confirmingOrder() {
+        String requestURL = baseURI + "confirm";
 
         RequestSpecification httpRequest = RestAssured.given();
 
-        httpRequest.header("Accept", "application/json"); // adding header to the request
-        httpRequest.header("X-Oc-Session", sessionId); // adding header to the request
-        httpRequest.header("X-Oc-Merchant-Id", merchantId); // adding header to the request
+        httpRequest.header("Accept", "application/json");
+        httpRequest.header("X-Oc-Session", sessionId);
+        httpRequest.header("X-Oc-Merchant-Id", merchantId);
 
-        // Get an overview of the order
         Response response = httpRequest.post(requestURL);
-        //response.getBody().prettyPrint();
-
         basicAssertion(response);
 
-        // Assert payment total amount
         String paymentTotal = JsonPath.from(response.getBody().asString()).get("data.totals[2].text");
         assertEquals("Error: Payment total doesn't match!","$105.00", paymentTotal);
 
-        // Assert shipping cost
         String shippingCost = JsonPath.from(response.getBody().asString()).get("data.totals[1].text");
         assertEquals("Error: Shipping cost doesn't match!","$5.00", shippingCost);
 
-        // Assert shipping zip
         String shippingZip = JsonPath.from(response.getBody().asString()).get("data.shipping_postcode");
         assertEquals("Error: Shipping zip doesn't match!","3333", shippingZip);
     }
 
     @And("I clear the cart")
-    public void i_clear_the_cart() {
-
-        String requestURL = baseURI + "confirm"; // building the API endpoint
+    public void clearingCart() {
+        String requestURL = baseURI + "confirm";
 
         RequestSpecification httpRequest = RestAssured.given();
 
-        httpRequest.header("Accept", "application/json"); // adding header to the request
-        httpRequest.header("X-Oc-Session", sessionId); // adding header to the request
-        httpRequest.header("X-Oc-Merchant-Id", merchantId); // adding header to the request
+        httpRequest.header("Accept", "application/json");
+        httpRequest.header("X-Oc-Session", sessionId);
+        httpRequest.header("X-Oc-Merchant-Id", merchantId);
 
-        // Get an overview of the order
-        Response response = httpRequest.post(requestURL);
-
-        // Clear the cart and reset the session
-        response = httpRequest.put(requestURL);
+        Response response = httpRequest.put(requestURL);
         //response.getBody().prettyPrint();
 
         basicAssertion(response);
