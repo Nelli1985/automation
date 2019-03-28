@@ -105,11 +105,21 @@ formatter.result({
   "status": "passed"
 });
 formatter.step({
-  "name": "I confirm my order and clear the cart",
+  "name": "I confirm my order",
   "keyword": "And "
 });
 formatter.match({
   "location": "MyAPIStepdefs.i_confirm_my_order_and_clear_the_cart()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "I clear the cart",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "MyAPIStepdefs.i_clear_the_cart()"
 });
 formatter.result({
   "status": "passed"

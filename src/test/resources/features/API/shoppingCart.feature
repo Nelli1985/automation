@@ -11,4 +11,5 @@ Scenario: Get shopping cart for a guest customer with static product
   And I set shipping method
   And I get payment method
   And I set payment method
-  And I confirm my order and clear the cart
+  And I confirm my order
+  And I clear the cart

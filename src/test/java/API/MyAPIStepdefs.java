@@ -1,6 +1,5 @@
 package API;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import cucumber.api.java.en.And;
@@ -11,7 +10,6 @@ import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import org.junit.Assert;
 
 import static org.junit.Assert.assertEquals;
 
@@ -19,7 +17,18 @@ public class MyAPIStepdefs {
     private String baseURI = "http://opencart3-simple.api.opencart-api.com/api/rest/";  // defined class level parameter so it would be usable by other methods as well
     private String sessionId;  // this parameter will be used by most of the following requests, so this too is a class level variable
     private final String merchantId = "123"; // this parameter will be used by most of the following requests, so this too is a class level variable with defined value
-    private Response response;
+
+
+    private Response basicAssertion(final Response response){
+        // asserting the response is correct
+        assertEquals("Error: Status code doesn't match", 200, response.getStatusCode());
+        assertEquals("Error: Content type doesn't match", "application/json; charset=utf-8", response.getContentType());
+
+        // another assertion to make sure the request was actually successful
+        Integer success = JsonPath.from(response.getBody().asString()).get("success");
+        assertEquals("Error: Success code doesn't match", "1", success.toString());
+        return response;
+    }
 
     @Given("^I have created a session$")
     public void iHaveCreatedASession() {
@@ -31,17 +40,11 @@ public class MyAPIStepdefs {
         httpRequest.header("Accept", "application/json"); // adding header to the request
         httpRequest.header("X-Oc-Merchant-Id", merchantId); // adding header to the request
 
-        response = httpRequest.get(requestURL);
+        Response response = httpRequest.get(requestURL);
 
+        basicAssertion(response);
         //response.getBody().prettyPrint();
-        // asserting the response is correct
-        assertEquals("Error: Status code doesn't match", 200, response.getStatusCode());
-        assertEquals("Error: Content type doesn't match", "application/json; charset=utf-8", response.getContentType());
-
-        // another assertion to make sure the request was actually successful
-        Integer success = JsonPath.from(response.getBody().asString()).get("success");
-        assertEquals("Error: Success code doesn't match", "1", success.toString());
-
+        
         sessionId = JsonPath.from(response.getBody().asString()).get("data.session"); // getting the sessionId value from the response body and saving it
     }
 
@@ -62,10 +65,12 @@ public class MyAPIStepdefs {
 
         httpRequest.body(requestParams.toString());
 
-        response = httpRequest.post(requestURL);
+        Response response = httpRequest.post(requestURL);
 
         //prints out the result
         //response.getBody().prettyPrint();
+
+        basicAssertion(response);
 
         // Assert productId
         String productId = JsonPath.from(response.getBody().asString()).get("data.product.product_id");
@@ -115,18 +120,12 @@ public class MyAPIStepdefs {
 
         httpRequest.body(requestParams.toString());
 
-        response = httpRequest.post(requestURL);
+        Response response = httpRequest.post(requestURL);
 
         //prints out the result
         //response.getBody().prettyPrint();
 
-        // asserting the response is correct
-        assertEquals("Error: Status code doesn't match", 200, response.getStatusCode());
-        assertEquals("Error: Content type doesn't match", "application/json; charset=utf-8", response.getContentType());
-
-        // another assertion to make sure the request was actually successful
-        Integer success = JsonPath.from(response.getBody().asString()).get("success");
-        assertEquals("Error: Success code doesn't match", "1", success.toString());
+        basicAssertion(response);
     }
 
     @Then("I see the product \"([^\"]*)\" in cart")
@@ -139,14 +138,16 @@ public class MyAPIStepdefs {
         httpRequest.header("X-Oc-Session", sessionId); // adding header to the request
         httpRequest.header("X-Oc-Merchant-Id", merchantId); // adding header to the request
 
-        response = httpRequest.get(requestURL);
+        Response response = httpRequest.get(requestURL);
 
         //prints out the result
         //response.getBody().prettyPrint();
 
+        basicAssertion(response);
+
         // Assert productId jsonData.id_tokens[0]["id_token.basic"];
         String productId = JsonPath.from(response.getBody().asString()).get("data.products[0].product_id");
-        assertEquals("Error: Product id doesn't match!","41", productId);
+        assertEquals("Error: Product id doesn't match!",cartProductId, productId);
 
         // Assert productName
         String productName = JsonPath.from(response.getBody().asString()).get("data.products[0].name");
@@ -188,18 +189,12 @@ public class MyAPIStepdefs {
 
         httpRequest.body(requestParams.toString());
 
-        response = httpRequest.post(requestURL);
+        Response response = httpRequest.post(requestURL);
 
         //prints out the result
         //response.getBody().prettyPrint();
 
-        // asserting the response is correct
-        assertEquals("Error: Status code doesn't match", 200, response.getStatusCode());
-        assertEquals("Error: Content type doesn't match", "application/json; charset=utf-8", response.getContentType());
-
-        // another assertion to make sure the request was actually successful
-        Integer success = JsonPath.from(response.getBody().asString()).get("success");
-        assertEquals("Error: Success code doesn't match", "1", success.toString());
+        basicAssertion(response);
     }
 
     @And("I get shipping method")
@@ -213,17 +208,11 @@ public class MyAPIStepdefs {
         httpRequest.header("X-Oc-Session", sessionId); // adding header to the request
         httpRequest.header("X-Oc-Merchant-Id", merchantId); // adding header to the request
 
-        response = httpRequest.get(requestURL);
+        Response response = httpRequest.get(requestURL);
 
         //response.getBody().prettyPrint();
 
-        // asserting the response is correct
-        assertEquals("Error: Status code doesn't match", 200, response.getStatusCode());
-        assertEquals("Error: Content type doesn't match", "application/json; charset=utf-8", response.getContentType());
-
-        // another assertion to make sure the request was actually successful
-        Integer success = JsonPath.from(response.getBody().asString()).get("success");
-        assertEquals("Error: Success code doesn't match", "1", success.toString());
+        basicAssertion(response);
 
         // Assert shipping title
         String shippingTitle = JsonPath.from(response.getBody().asString()).get("data.shipping_methods.flat.title");
@@ -254,16 +243,10 @@ public class MyAPIStepdefs {
 
         // POST shipping options request and asserting it
         httpRequest.body(requestParams.toString());
-        response = httpRequest.post(requestURL);
+        Response response = httpRequest.post(requestURL);
         //response.getBody().prettyPrint();
 
-        // asserting the response is correct
-        assertEquals("Error: Status code doesn't match", 200, response.getStatusCode());
-        assertEquals("Error: Content type doesn't match", "application/json; charset=utf-8", response.getContentType());
-
-        // another assertion to make sure the request was actually successful
-        Integer success2 = JsonPath.from(response.getBody().asString()).get("success");
-        assertEquals("Error: Success code doesn't match", "1", success2.toString());
+        basicAssertion(response);
     }
 
     @And("I get payment method")
@@ -278,17 +261,10 @@ public class MyAPIStepdefs {
         httpRequest.header("X-Oc-Merchant-Id", merchantId); // adding header to the request
 
         // GET paymentmethod and asserting it
-        response = httpRequest.get(requestURL);
+        Response response = httpRequest.get(requestURL);
         //response.getBody().prettyPrint();
 
-        // asserting the response is correct
-        assertEquals("Error: Status code doesn't match", 200, response.getStatusCode());
-        assertEquals("Error: Content type doesn't match", "application/json; charset=utf-8", response.getContentType());
-
-
-        // another assertion to make sure the request was actually successful
-        Integer success = JsonPath.from(response.getBody().asString()).get("success");
-        assertEquals("Error: Success code doesn't match", "1", success.toString());
+        basicAssertion(response);
 
         // Assert payment title
         String paymentTitle = JsonPath.from(response.getBody().asString()).get("data.payment_methods.pp_express.title");
@@ -319,21 +295,13 @@ public class MyAPIStepdefs {
 
         httpRequest.body(requestParams.toString());
 
-        response = httpRequest.post(requestURL);
+        Response response = httpRequest.post(requestURL);
 
-        // asserting POST paymentmethod
-        // asserting the response is correct
-        assertEquals("Error: Status code doesn't match", 200, response.getStatusCode());
-        assertEquals("Error: Content type doesn't match", "application/json; charset=utf-8", response.getContentType());
-
-
-        // another assertion to make sure the request was actually successful
-        Integer success2 = JsonPath.from(response.getBody().asString()).get("success");
-        assertEquals("Error: Success code doesn't match", "1", success2.toString());
+        basicAssertion(response);
 
     }
 
-    @And("I confirm my order and clear the cart")
+    @And("I confirm my order")
     public void i_confirm_my_order_and_clear_the_cart() {
 
         String requestURL = baseURI + "confirm"; // building the API endpoint
@@ -345,17 +313,10 @@ public class MyAPIStepdefs {
         httpRequest.header("X-Oc-Merchant-Id", merchantId); // adding header to the request
 
         // Get an overview of the order
-        response = httpRequest.post(requestURL);
+        Response response = httpRequest.post(requestURL);
         //response.getBody().prettyPrint();
 
-        // asserting the response is correct
-        assertEquals("Error: Status code doesn't match", 200, response.getStatusCode());
-        assertEquals("Error: Content type doesn't match", "application/json; charset=utf-8", response.getContentType());
-
-
-        // another assertion to make sure the request was actually successful
-        Integer success = JsonPath.from(response.getBody().asString()).get("success");
-        assertEquals("Error: Success code doesn't match", "1", success.toString());
+        basicAssertion(response);
 
         // Assert payment total amount
         String paymentTotal = JsonPath.from(response.getBody().asString()).get("data.totals[2].text");
@@ -368,19 +329,27 @@ public class MyAPIStepdefs {
         // Assert shipping zip
         String shippingZip = JsonPath.from(response.getBody().asString()).get("data.shipping_postcode");
         assertEquals("Error: Shipping zip doesn't match!","3333", shippingZip);
+    }
+
+    @And("I clear the cart")
+    public void i_clear_the_cart() {
+
+        String requestURL = baseURI + "confirm"; // building the API endpoint
+
+        RequestSpecification httpRequest = RestAssured.given();
+
+        httpRequest.header("Accept", "application/json"); // adding header to the request
+        httpRequest.header("X-Oc-Session", sessionId); // adding header to the request
+        httpRequest.header("X-Oc-Merchant-Id", merchantId); // adding header to the request
+
+        // Get an overview of the order
+        Response response = httpRequest.post(requestURL);
 
         // Clear the cart and reset the session
         response = httpRequest.put(requestURL);
         //response.getBody().prettyPrint();
 
-        // asserting the response is correct
-        assertEquals("Error: Status code doesn't match", 200, response.getStatusCode());
-        assertEquals("Error: Content type doesn't match", "application/json; charset=utf-8", response.getContentType());
-
-
-        // another assertion to make sure the request was actually successful
-        Integer success2 = JsonPath.from(response.getBody().asString()).get("success");
-        assertEquals("Error: Success code doesn't match", "1", success2.toString());
+        basicAssertion(response);
     }
 }
 
